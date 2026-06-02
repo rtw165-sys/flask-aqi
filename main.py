@@ -58,8 +58,8 @@ def index():
         print(datetime, min_values, max_values)
 
         data["datetime"] = datetime
-        data["min"] = [min_values[0], min_values[16]]
-        data["max"] = [max_values[0], max_values[16]]
+        data["min"] = [min_values[0], min_values[2], min_values[3]]
+        data["max"] = [max_values[0], max_values[2], max_values[3]]
 
     return render_template("index.html", result=result, counties=counties, data=data)
 

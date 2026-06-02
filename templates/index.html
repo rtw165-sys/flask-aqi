@@ -213,7 +213,7 @@
 
 </head>
 
-<body>
+<body>    
   <h1>🌫 空氣品質指標 (AQI)</h1>
   <p>資料來源：空氣品質監測網 API</p>
   <p>🕒 資料更新時間：<span id="update-time">
@@ -223,12 +223,12 @@
   {% if data %}
   <div class="kpi-card higher">
     <span class="kpi-label">🚩 最高測站 </span>
-    <span class="kpi-value">{{data.max[0]}} | {{data.max[1]}} <small>status</small></span>
+    <span class="kpi-value">{{data.max[0]}} | {{data.max[1]}} {{data.max[2]}} </span>
   </div>
 
   <div class="kpi-card lower">
     <span class="kpi-label">✅ 最低測站</span>
-    <span class="kpi-value">{{data.min[0]}} | {{data.min[1]}} <small>status</small></span>
+    <span class="kpi-value">{{data.min[0]}} | {{data.min[1]}} {{data.min[2]}} </span>
   </div>
   {% else %}
   <span class="kpi-value">資料取得失敗!</span>
@@ -310,7 +310,7 @@
       fetch(`/api/data/${county}`)
         .then(res => res.json())
         .then(data => {
-          const labels = data.map(value => value[1]);
+          const labels = data.map(value => value[0]);
           const values = data.map(value => value[2]);
 
           console.log(labels, values);
@@ -345,7 +345,8 @@
       }
     });
 
-    console.log(myChart);
+    console.log(myChart);    
+    
 
     //countiesEl.selectedIndex = 1;
     //countiesEl.dispatchEvent(new Event("change"));

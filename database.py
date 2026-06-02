@@ -13,7 +13,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def get_data():
     print("取得aqi資料中")
     try:
-        api_url = "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=4c89a32a-a214-461b-bf29-30ff32a61a8a&limit=1000&sort=ImportDate desc&format=JSON"
+        api_url = "https://data.moenv.gov.tw/api/v2/aqx_p_432?api_key=e75b1660-e564-4107-aad5-a8be1f905dd9&limit=1000&sort=ImportDate%20desc&format=JSON"
         resp = requests.get(api_url, verify=False)
         df = pd.read_json(io.StringIO(resp.text))
         df1 = df.drop_duplicates(subset=["sitename", "publishtime"]).dropna()
@@ -114,9 +114,10 @@ def get_latest_data():
         return result
 
     sql = """
-    select * from data where publishtime =
+    select * from data where publishtime=
     (select max(publishtime) from data);
     """
+
     # sql = 'select max(`publishtime`) from `data`;'
 
     try:
